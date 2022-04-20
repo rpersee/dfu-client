@@ -1,87 +1,95 @@
-<script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
-import TheWelcome from "./components/TheWelcome.vue";
-</script>
-
 <template>
-  <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="./assets/logo.svg"
-      width="125"
-      height="125"
-    />
+  <!-- App.vue -->
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+  <v-app>
+    <v-app-bar app>
+      <v-toolbar-title>DFU Client</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn rounded="pill">
+        Activity
+        <v-icon right>mdi-history</v-icon>
+      </v-btn>
+    </v-app-bar>
 
-  <main>
-    <TheWelcome />
-  </main>
+    <!-- Sizes your content based upon application components -->
+    <v-main>
+      <!-- Provides the application the proper gutter -->
+      <v-container fluid>
+        <v-row dense>
+          <v-col cols="12">
+            <v-switch label="AUTO" hide-details class="justify-center">
+              <template v-slot:prepend>
+                <label class="v-label">MANUAL</label>
+              </template>
+            </v-switch>
+          </v-col>
+        </v-row>
+
+        <!-- https://vuetifyjs.com/en/components/chips/#custom-list -->
+        <v-row>
+          <!-- dense -->
+          <v-col cols="12" :md="6">
+            <v-card class="mx-auto" max-width="600">
+              <v-toolbar flat color="transparent">
+                <!-- <v-spacer></v-spacer> -->
+                <v-select :items="items" label="Select a device"></v-select>
+                <!-- <v-spacer></v-spacer> -->
+              </v-toolbar>
+
+              <v-card-text class="d-flex justify-space-between"></v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn rounded="pill">Download</v-btn>
+                <v-btn rounded="pill">Upload</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+
+          <v-col cols="12" :md="6">
+            <v-card class="mx-auto" max-width="600">
+              <v-toolbar flat color="transparent">
+                <!-- <v-spacer></v-spacer> -->
+                <v-select :items="items" label="Select an image"></v-select>
+                <!-- <v-spacer></v-spacer> -->
+              </v-toolbar>
+
+              <v-card-text class="d-flex justify-space-between"></v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn rounded="pill">Upload</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+
+    <v-footer app>
+      <!-- -->
+    </v-footer>
+  </v-app>
 </template>
 
 <style>
-@import "./assets/base.css";
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
-  font-weight: normal;
+.v-input__prepend {
+  margin-inline-end: unset !important;
+  padding-top: unset !important;
 }
-
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
-
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+.v-input__prepend .v-label {
+  padding-inline-start: 0px !important;
+  padding-inline-end: 10px !important;
 }
 </style>
+
+ <script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "App",
+  data: () => ({
+    items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+  }),
+});
+</script>
